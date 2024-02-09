@@ -30,6 +30,7 @@ class ReviewSchema(Schema):
     id = fields.Str(dump_only=True)
     body = fields.Str(required=True)
     timestamp = fields.DateTime(dump_only = True)
+    resturant_id = fields.Str(required=True)
 
 class ResturantSchemaNested(ResturantSchema):
     reviews = fields.List(fields.Nested(ReviewSchema), dump_only=True)

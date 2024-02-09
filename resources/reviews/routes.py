@@ -35,7 +35,7 @@ class Review(MethodView):
             return{'message': 'Review deleted'}, 202
         return {'message': 'Invalid review or user'}, 400
     
-    @bp.route('/')
+    @bp.route('/', methods=['GET','POST'])
     class ReviewList(MethodView):
 
         @bp.response(200, ReviewSchemaNested(many = True))
@@ -49,6 +49,7 @@ class Review(MethodView):
                 review = ReviewModel()
                 review.user_id = get_jwt_identity()
                 review.body = review_data['body']
+                review.resturant_id = review_data['resturant_id']
                 review.commit()
                 return {'message': "Review created"}, 201
             except:
